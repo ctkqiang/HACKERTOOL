@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Hacker Tool</string>
 
+    <string name="connectivity">CONNECTIVITY</string>
     <string name="wifi">WIFI</string>
     <string name="DEAUTHER">DEAUTHER</string>
+    <string name="wifideauther">WI-FI DEAUTHER</string>
 </resources>
