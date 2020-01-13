@@ -8,6 +8,8 @@
       <w>listview</w>
       <w>mainmenu</w>
       <w>pwned</w>
+      <w>showtoast</w>
+      <w>termux</w>
       <w>wifideauther</w>
     </words>
   </dictionary>

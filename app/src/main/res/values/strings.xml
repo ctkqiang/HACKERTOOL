@@ -3,6 +3,8 @@
 
     <string name="connectivity">CONNECTIVITY</string>
     <string name="wifi">WIFI</string>
-    <string name="DEAUTHER">DEAUTHER</string>
-    <string name="wifideauther">WI-FI DEAUTHER</string>
+    <string name="DEAUTHER">ESP8266 DEAUTHER</string>
+    <string name="wifideauther">THIS IS  A WI-FI DEAUTHER USING ESP 8266 </string>
+    <string name="termux">TERMUX TERM</string>
+    <string name="HC05">BLE HC05</string>
 </resources>
