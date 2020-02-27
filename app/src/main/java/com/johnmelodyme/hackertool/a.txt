@@ -1,0 +1,84 @@
+/ https://bit.ly/36L6ES6
+        DEAUTHER.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new SweetAlertDialog(MAINMENU.this, SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText("ARE YOU CONNECTED TO WIFI NAMED \"pwned\"?")
+                        .setConfirmText("YES, I AM.")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                SweetAlertDialog pDialog;
+                                pDialog = new SweetAlertDialog(MAINMENU.this, SweetAlertDialog.PROGRESS_TYPE);
+                                pDialog.getProgressHelper().setBarColor(Color.parseColor("#4CAF50"));
+                                pDialog.setTitleText("Loading");
+                                pDialog.setCancelable(false);
+                                pDialog.show();
+                                sDialog.dismissWithAnimation();
+                                Intent DEAUTHER;
+                                DEAUTHER = new Intent(Intent.ACTION_VIEW,
+                                        Uri.parse("http://192.168.4.1/"));
+                                startActivity(DEAUTHER);
+                            }
+                        })
+                        .setCancelButton("NO", new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                sDialog.dismissWithAnimation();
+                                Intent WIFI;
+                                WIFI = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
+                                startActivityForResult(WIFI, WIFI_REQUEST_CODE);
+                            }
+                        })
+                        .show();
+            }
+        });
+
+        DEAUTHER.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                new SweetAlertDialog(MAINMENU.this, SweetAlertDialog.BUTTON_POSITIVE)
+                        .setConfirmText("OKAY")
+                        .show();
+                return false;
+            }
+        });
+
+        TERMINAL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isTermuxInstalled;
+                isTermuxInstalled = termuxInstalled("com.termux");
+                if (isTermuxInstalled){
+                    Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.termux");
+                    if (launchIntent != null) {
+                        startActivity(launchIntent);
+                    } else {
+                        showtoast("PLEASE INSTALL TERMUX");
+                    }
+                } else {
+                    Intent TERMUX;
+                    TERMUX = new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("https://play.google.com/store/apps/details?id=com.termux&hl=en"));
+                    startActivity(TERMUX);
+                }
+            }
+        });
+    }
+
+    private boolean termuxInstalled(String s) {
+        PackageManager pm = getPackageManager();
+        try {
+            pm.getPackageInfo(s, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "TERMUX NOT INSTALLED.");
+        }
+        return false;
+    }
+
+    public void showtoast(String message){
+        Toast.makeText(MAINMENU.this, message,
+                Toast.LENGTH_LONG)
+                .show();
+    }
